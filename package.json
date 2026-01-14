@@ -1,0 +1,42 @@
+{
+  "name": "sveltekit-go-graphql-starter",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "yarn run format:js && yarn run format:go",
+    "format:js": "prettier --write \"**/*.{js,ts,svelte,json,md}\"",
+    "format:go": "turbo run format --filter=core",
+    "format:check": "yarn run format:check:js && yarn run format:check:go",
+    "format:check:js": "prettier --check \"**/*.{js,ts,svelte,json,md}\"",
+    "format:check:go": "turbo run format:check --filter=core",
+    "check-types": "turbo run check-types",
+    "test": "turbo run test",
+    "db:up": "make db-up",
+    "db:down": "make db-down",
+    "db:reset": "make db-reset",
+    "migrate:up": "make migrate-up",
+    "migrate:down": "make migrate-down",
+    "gqlgen": "turbo run gqlgen --filter=core",
+    "sqlc": "turbo run sqlc --filter=core",
+    "prepare": "husky",
+    "devtools": "turbo devtools"
+  },
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.7.4",
+    "prettier-plugin-svelte": "^3.4.0",
+    "turbo": "^2.7.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "packageManager": "yarn@1.22.22"
+}

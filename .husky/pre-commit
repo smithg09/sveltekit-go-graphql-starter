@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint-staged
+yarn lint-staged
+
+# Type check staged TypeScript/Svelte files
+if git diff --cached --name-only | grep -E '\.(ts|svelte)$' > /dev/null; then
+  echo "🔍 Type checking staged files..."
+  yarn check-types || exit 1
+fi

@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: golang-sveltekit-postgres
+    ports:
+      - "${POSTGRES_PORT:-5439}:5432"
+    networks:
+      - sveltekit-go-graphql-starter
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-supersecretpassword}
+      - POSTGRES_DB=${POSTGRES_DB:-sveltekit-go-graphql-starter}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  migrate:
+    image: migrate/migrate
+    container_name: golang-sveltekit-migrate
+    volumes:
+      - ./services/core/db/migration:/migrations
+    networks:
+      - sveltekit-go-graphql-starter
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: [
+      "-path", "/migrations",
+      "-database", "postgres://postgres:supersecretpassword@postgres:5432/sveltekit-go-graphql-starter?sslmode=disable",
+      "up"
+    ]
+
+volumes:
+  postgres_data:
+
+networks:
+  sveltekit-go-graphql-starter:
+    name: sveltekit-go-graphql-starter
+    driver: bridge

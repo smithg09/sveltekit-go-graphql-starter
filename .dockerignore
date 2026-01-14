@@ -1,0 +1,55 @@
+# Dependencies
+node_modules
+vendor/
+
+# Build outputs
+dist
+build
+.turbo
+.svelte-kit
+tmp/
+
+# Testing
+coverage
+test-results
+*.test
+mocks/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+*.md
+LICENSE
+CONTRIBUTING.md
+
+# CI/CD
+.github
+.gitlab-ci.yml
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Misc
+*.log
