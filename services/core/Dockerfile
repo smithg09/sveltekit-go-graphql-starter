@@ -8,10 +8,11 @@ WORKDIR /app
 # Install and Build `core` 
 FROM base AS builder
 
-COPY . .
-
+COPY go.mod go.sum ./
 RUN go mod download
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o core cmd/core/main.go
+
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o build/core cmd/core/main.go
 
 # Prepare production image
 FROM alpine:latest AS runner
@@ -24,7 +25,7 @@ RUN addgroup --system --gid 1001 user101
 RUN adduser --system --uid 1001 user102
 USER user102
 
-COPY --from=builder --chown=user102:user101 /app/core .
+COPY --from=builder --chown=user102:user101 /app/build/core .
 
 EXPOSE 8080
 
