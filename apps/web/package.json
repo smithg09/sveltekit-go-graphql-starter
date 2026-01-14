@@ -21,6 +21,7 @@
 		"graphql": "^16.9.0"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.57.0",
 		"@repo/eslint-config": "*",
 		"@repo/typescript-config": "*",
 		"@sveltejs/adapter-node": "^5.5.0",

@@ -3,33 +3,64 @@
   "ui": "tui",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".svelte-kit/**", ".vercel/**", "build/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*"
+      ],
+      "outputs": [
+        ".svelte-kit/**",
+        ".vercel/**",
+        "build/**"
+      ]
     },
     "gqlgen": {
-      "dependsOn": ["^gqlgen"],
-      "outputs": ["cmd/core/graph/**"]
+      "dependsOn": [
+        "^gqlgen"
+      ],
+      "outputs": [
+        "cmd/core/graph/**"
+      ]
     },
     "sqlc": {
-      "dependsOn": ["^sqlc"],
-      "outputs": ["internal/module/**/querier/**"]
+      "dependsOn": [
+        "^sqlc"
+      ],
+      "outputs": [
+        "internal/module/**/querier/**"
+      ]
     },
     "format": {
-      "dependsOn": ["^format"]
+      "dependsOn": [
+        "^format"
+      ]
     },
     "format:check": {
-      "dependsOn": ["^format:check"]
+      "dependsOn": [
+        "^format:check"
+      ]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
     },
     "check-types": {
-      "dependsOn": ["^check-types"]
+      "dependsOn": [
+        "build",
+        "^check-types"
+      ]
     },
     "test": {
-      "dependsOn": ["^test"],
-      "outputs": ["coverage/**", "cover.out"]
+      "dependsOn": [
+        "^test"
+      ],
+      "outputs": [
+        "coverage/**",
+        "cover.out"
+      ]
     },
     "dev": {
       "cache": false,
